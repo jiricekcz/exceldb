@@ -1,7 +1,7 @@
 {
-	"name": "typescript-npm-module",
-	"version": "1.0.0",
-	"description": "A generic typescript npm package",
+	"name": "exceldb",
+	"version": "0.0.0",
+	"description": "Database adapter for spreadsheet files for hobby projects",
 	"main": "./lib/index.js",
 	"types": "lib/index.d.ts",
 	"scripts": {
@@ -13,14 +13,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/jiricekcz/typescript-npm-module.git"
+		"url": "git+https://github.com/jiricekcz/exceldb.git"
 	},
 	"author": "jiricekcz",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/jiricekcz/typescript-npm-module/issues"
+		"url": "https://github.com/jiricekcz/exceldb/issues"
 	},
-	"homepage": "https://github.com/jiricekcz/typescript-npm-module#readme",
+	"homepage": "https://github.com/jiricekcz/exceldb#readme",
 	"devDependencies": {
 		"@types/node": "^17.0.10",
 		"jest": "^27.4.7",
