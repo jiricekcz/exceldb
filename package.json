@@ -7,10 +7,8 @@
 	"scripts": {
 		"test": "npx jest",
 		"build": "tsc",
-		"lint": "npx eslint . --ext .ts",
-		"lint-fix": "npx eslint . --ext .ts --fix",
 		"format": "npx prettier --write \"src/**/*.ts\"",
-		"prepare": "npm run format && npm run lint-fix && npm run build && npm test",
+		"prepare": "npm run format && npm run build && npm test",
 		"preversion": "npm run lint"
 	},
 	"repository": {
@@ -25,12 +23,6 @@
 	"homepage": "https://github.com/jiricekcz/typescript-npm-module#readme",
 	"devDependencies": {
 		"@types/node": "^17.0.10",
-		"@typescript-eslint/eslint-plugin": "^5.10.0",
-		"@typescript-eslint/parser": "^5.10.0",
-		"eslint": "^8.7.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-eslint-comments": "^3.2.0",
-		"eslint-plugin-import": "^2.25.4",
 		"jest": "^27.4.7",
 		"prettier": "^2.5.1",
 		"ts-node": "^10.4.0",
