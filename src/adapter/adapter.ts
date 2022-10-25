@@ -31,7 +31,7 @@ export interface CellConstructorOptionsVirtual<T extends CellTypeVirtual> extend
         [name: string]: (value: T["virtualType"]) => boolean
     }
 }
-
+export type CellInterfaceType<C extends CellType> = C extends CellTypeVirtual ? C["virtualType"] : C["storageType"]; 
 export type CellConstructorOptions<T extends CellType> = T extends CellTypeVirtual ? CellConstructorOptionsVirtual<T> : CellConstructorOptionsDefault<T>; 
 export type WorkbookConstructorOptions<T extends WorkbookStructure> = {
     sheets: {
@@ -114,13 +114,33 @@ export abstract class Column<W extends WorkbookStructure, S extends keyof W, N e
 }
 
 
+
 export abstract class Row<W extends WorkbookStructure, S extends keyof W> {
     public readonly workbook: WorkbookAdapter<W>;
     public readonly sheet: Sheet<W, S>;
     public rowNumber: number;
+
+    public readonly cells: {
+        [C in keyof W[S]]: CellInterfaceType<W[S][C]>
+    };
     constructor(sheet: Sheet<W, S>, rowNumber: number) {
         this.sheet = sheet;
         this.rowNumber = rowNumber;
         this.workbook = sheet.wokrbook;
+
+        const cells: {[C in keyof W[S]]?: CellInterfaceType<W[S][C]>} = {};
+
+        for (const columnName of sheet.getColumnNames()) {
+            Object.defineProperty(cells, columnName, {
+                get: () => this.getCellValue(columnName),
+                set: (value) => this.setCellValue(columnName, value),
+                enumerable: true
+            });
+        }            
+        this.cells = cells as {[C in keyof W[S]]: CellInterfaceType<W[S][C]>};
     }
+    public abstract getCellValue<C extends keyof W[S]>(columnName: C): CellInterfaceType<W[S][C]>;
+    public abstract setCellValue<C extends keyof W[S]>(columnName: C, value: CellInterfaceType<W[S][C]>): void;
+
+
 }
